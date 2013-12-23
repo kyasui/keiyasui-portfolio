@@ -76,11 +76,6 @@ body {
   background: #333;
   border-left: 20px solid #ffffff;
   border-right: 20px solid #ffffff;
-  background: url('../images/bg.jpg') no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  background-attachment: fixed;
   font-family: 'open_sanslight', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 @media only screen and (max-width: 768px) {
@@ -98,6 +93,11 @@ body:after {
   right: 0;
   height: 20px;
   z-index: 10;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  transform: translateZ(0px);
 }
 @media only screen and (max-width: 768px) {
   body:before,
@@ -117,6 +117,11 @@ body:after {
   top: 20px;
   left: 40px;
   z-index: 10;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  transform: translateZ(0px);
 }
 @media only screen and (max-width: 768px) {
   .kei-yasui-logo {
@@ -131,6 +136,11 @@ body:after {
   right: 20px;
   z-index: 5;
   overflow: hidden;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  transform: translateZ(0px);
 }
 @media only screen and (max-width: 768px) {
   .site-nav {
@@ -165,7 +175,8 @@ body:after {
     background-size: 40px 40px;
   }
 }
-.site-nav .nav-trigger:hover {
+.site-nav .nav-trigger:hover,
+.site-nav .nav-trigger.active {
   background-color: #00aeef;
 }
 .site-nav .nav-item {
@@ -176,20 +187,60 @@ body:after {
   color: #ffffff;
   font-size: 18px;
   line-height: 26px;
-  background: #00aeef;
+  background: #000000;
   display: inline-block;
   margin: 10px 0;
   padding: 10px;
   font-family: 'open_sanslight_italic', "Helvetica Neue", Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
   right: -200%;
-  -webkit-transition: right 0.5s;
-  -moz-transition: right 0.5s;
-  -o-transition: right 0.5s;
-  transition: right 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 .site-nav .nav-item.active {
   right: 0;
+}
+.site-nav .nav-item:hover {
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  opacity: 1 !important;
+}
+.site-nav:hover .nav-item {
+  -webkit-opacity: 0.6;
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+}
+.animate-blur {
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+.animate-blur.activate {
+  -webkit-filter: blur(0px);
+  -moz-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(0px);
+}
+.animate-opacity {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+.animate-opacity.activate {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
 }
 .section {
   zoom: 1;
@@ -224,6 +275,7 @@ body:after {
 }
 .work-section .work-row {
   zoom: 1;
+  background: #ffffff;
 }
 .work-section .work-row:before,
 .work-section .work-row:after {
@@ -236,7 +288,7 @@ body:after {
 .work-section .work-row .work-item {
   position: relative;
   zoom: 1;
-  min-height: 500px;
+  background: none;
 }
 .work-section .work-row .work-item:before,
 .work-section .work-row .work-item:after {
@@ -253,12 +305,22 @@ body:after {
 .work-section .work-row.alt .work-description p {
   color: #ffffff;
 }
+.work-section .work-row.alt .work-image img {
+  border-left: none;
+}
+@media only screen and (max-width: 768px) {
+  .work-section .work-row {
+    padding: 0 0 80px 0;
+  }
+}
 .work-section .work-description {
   position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 42%;
-  padding: 10% 4% 0 4%;
+  padding: 0 4% 0 4%;
+  z-index: 2;
 }
 .work-section .work-description h3 {
   font-size: 18px;
@@ -277,11 +339,11 @@ body:after {
 @media only screen and (max-width: 768px) {
   .work-section .work-description {
     position: relative;
-    top: 300px;
     left: 0;
     right: 0;
     width: 92%;
-    padding: 0 4%;
+    padding: 0 4% 4%;
+    background: none;
   }
 }
 .work-section .work-image {
@@ -291,7 +353,6 @@ body:after {
   bottom: 0;
   width: 50%;
   height: 100%;
-  background: #ccc;
 }
 @media only screen and (max-width: 768px) {
   .work-section .work-image {
@@ -300,7 +361,16 @@ body:after {
     right: 0;
     bottom: auto;
     width: 100%;
-    height: 300px;
+  }
+}
+.work-section .work-image img {
+  display: block;
+  width: 100%;
+  border-left: 1px dotted #ccc;
+}
+@media only screen and (max-width: 768px) {
+  .work-section .work-image img {
+    border-left: none;
   }
 }
 .about-section h2 {
@@ -334,7 +404,7 @@ body:after {
 }
 .resume {
   width: 92%;
-  max-width: 1024px;
+  max-width: 728px;
   margin: 0 auto;
   color: #ffffff;
   padding: 0 0 10% 0;
@@ -404,11 +474,20 @@ body:after {
   background-image: url('../images/contact_bg.jpg');
   background-repeat: no-repeat;
   background-position: center center;
-  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   padding: 0 0 15% 0;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  transform: translateZ(0px);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .contact-section h2 {
   text-align: center;
@@ -496,4 +575,140 @@ body:after {
   -webkit-opacity: 0.8;
   -moz-opacity: 0.8;
   opacity: 0.8;
+}
+.big-screen {
+  display: block;
+}
+@media only screen and (max-width: 768px) {
+  .big-screen {
+    display: none;
+  }
+}
+.little-screen {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  .little-screen {
+    display: block;
+  }
+}
+table {
+  width: 100%;
+  height: 100%;
+}
+table td {
+  vertical-align: middle;
+}
+/*	BigVideo Styles 
+	You may need to adjust these styles to get this working right in your design. 
+*/
+#big-video-wrap {
+  overflow: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.vjs-control-bar,
+.vjs-text-track-display {
+  display: none;
+}
+#big-video-vid,
+#big-video-image {
+  position: absolute;
+}
+#big-video-control-container {
+  position: fixed;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-transition-duration: 0.6s;
+  -moz-transition-duration: 0.6s;
+  -ms-transition-duration: 0.6s;
+  -o-transition-duration: 0.6s;
+  transition-duration: 0.6s;
+}
+#big-video-control {
+  width: 100%;
+  height: 16px;
+  position: relative;
+}
+#big-video-control-middle {
+  margin: 0 56px 0 24px;
+}
+#big-video-control-bar {
+  width: 100%;
+  height: 16px;
+  position: relative;
+  cursor: pointer;
+}
+#big-video-control-progress {
+  position: absolute;
+  top: 7px;
+  height: 3px;
+  width: 0%;
+  background: #fff;
+}
+#big-video-control-track {
+  position: absolute;
+  top: 8px;
+  height: 1px;
+  width: 100%;
+  background: #fff;
+}
+#big-video-control-bound-left {
+  left: 0;
+}
+#big-video-control-bound-right {
+  right: -1px;
+}
+#big-video-control-track .ui-slider-handle {
+  opacity: 0;
+}
+#big-video-control-playhead {
+  left: 30%;
+}
+#big-video-control-play {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-image: url('bigvideo.png');
+}
+#big-video-control-timer {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  color: #fff;
+  font-size: 11px;
+}
+#big-video-control-playhead,
+#big-video-control-bound-left,
+#big-video-control-bound-right {
+  position: absolute;
+  top: 0;
+  height: 16px;
+  width: 1px;
+  background: #fff;
+}
+#big-video-control .ui-slider-handle {
+  border-left: solid 1px #fff;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -8px;
+}
+.transparent {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+.vjs-big-play-button {
+  display: none !important;
 }
