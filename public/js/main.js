@@ -6,6 +6,7 @@ var k = {
 	ui: {
 		$doc: $(document),
 		$w: $(window),
+		$html: $('html'),
 		$body: $('body'),
 		$all_sections: $('.section'),
 		$intro_section: $('.intro-section'),
@@ -45,7 +46,7 @@ var k = {
 		});
 	},
 	init_bg_media: function() {
-		if (k.vars.w_width >= 960) {
+		if (k.vars.w_width >= 960 && k.ui.$html.hasClass('video') && k.ui.$html.hasClass('no-touch')) {
 			var bg_media = new $.BigVideo();
 			bg_media.init();
 			bg_media.show('/video/city.mp4', {	
@@ -53,7 +54,7 @@ var k = {
 				altSource: '/video/city.ogv'
 			});
 		} else {
-			k.ui.$body.addClass('mobile');
+			k.ui.$body.addClass('fallback');
 		}
 	},
 	init_waypoints: function() {
@@ -128,7 +129,7 @@ var k = {
             }, 500);
 		});
 
-		k.ui.$w.on('resize', function(){
+		k.ui.$w.on('resize orientationchange', function(){
 			k.set_intro_height();
 			k.set_work_height();
 		});

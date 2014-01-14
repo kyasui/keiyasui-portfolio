@@ -107,7 +107,7 @@
 
 body {
 	.zero-out;
-	background: #333;
+	background: #000;
 
 	border-left: 20px solid @white;
     border-right: 20px solid @white;  
@@ -116,10 +116,6 @@ body {
 		border-left: 10px solid @white;
     	border-right: 10px solid @white; 
 	}
-
-	// background: url('../images/bg.jpg') no-repeat center center;
-	// .lh-background-size(cover);
-	// background-attachment: fixed;
 
 	.os-light;
 
@@ -139,20 +135,22 @@ body {
 
 	    .lh-transform(translateZ(0));
 	}
+
 	&:before {
 	    top: 0;
 	}
+
 	&:after {
 	    bottom: 0;
 	}
 
-	&.mobile {
+	&.fallback {
 		background-image: url('../images/mobile_bg.jpg');
-		background-repeeat: no-repeat;
+		background-repeat: no-repeat;
 		background-attachment: fixed;
-		background-position: center center;
+		background-position: center top;
 		background-color: @black;
-		.lh-background-size(cover);
+		// .lh-background-size(cover, 100%);
 	}
 }
 
@@ -162,6 +160,7 @@ body {
 	position: absolute;
 	top: 20px;
 	left: 20px;
+	z-index: 2;
 
 	@media only screen and (max-width : 960px) { 
 		width: 100px;
@@ -232,7 +231,7 @@ body {
 		padding: 10px;
 		.os-light-italic;
 		letter-spacing: 2px;
-		.lh-opacity(0.6);
+		.lh-opacity(0.8);
 
 		right: -200%;
 
@@ -258,11 +257,23 @@ body {
 	}
 }
 
+.touch {
+	.animate-blur {
+		.lh-blur(0);
+	}
+}
+
 .animate-opacity {
 	.lh-transition(opacity 1s);
 	.lh-opacity(0.0);
 
 	&.activate {
+		.lh-opacity(1.0);
+	}
+}
+
+.touch {
+	.animate-opacity {
 		.lh-opacity(1.0);
 	}
 }
@@ -289,6 +300,10 @@ body {
 		.zero-out;
 		margin: 20% 4%;
 		width: 92%;		
+
+		@media only screen and (max-width : 960px) { 
+			margin: 20% 4%;
+		}
 	}
 }
 
@@ -424,7 +439,7 @@ body {
 		width: 50%;
 		height: 100%;	
 
-		background: url('../images/loader.gif')	no-repeat center center;
+		// background: url('../images/loader.gif')	no-repeat center center;
 
 		@media only screen and (max-width : 960px) { 
 			top: 0;
@@ -497,6 +512,10 @@ body {
 	color: @white;
 	padding: 0 0 10% 0;
 
+	@media only screen and (max-width : 960px) { 
+		padding: 0 4% 10% 4%;
+	}
+
 	.resume-header {
 		.os-bold;
 		font-size: 28px;
@@ -518,6 +537,11 @@ body {
 			float: right;
 			text-align: right;
 			.os-italic;
+			letter-spacing: 0;
+
+			@media only screen and (max-width : 960px) { 
+				font-size: 12px;
+			}
 		}
 	}
 
@@ -568,7 +592,7 @@ body {
 	.lh-backface-visibility(hidden);
 
 	@media only screen and (max-width : 960px) { 
-		min-height: 600px;
+		min-height: 100%;
 	}
 
 	h2 {
@@ -586,7 +610,8 @@ body {
 		width: 92%;
 
 		@media only screen and (max-width : 960px) { 
-			line-height: 600px;
+			line-height: 24px;
+			margin: 30% auto;
 		}
 
 		a {

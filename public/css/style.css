@@ -73,7 +73,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #333;
+  background: #000;
   border-left: 20px solid #ffffff;
   border-right: 20px solid #ffffff;
   font-family: 'open_sanslight', "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -111,21 +111,19 @@ body:before {
 body:after {
   bottom: 0;
 }
-body.mobile {
+body.fallback {
   background-image: url('../images/mobile_bg.jpg');
-  background-repeeat: no-repeat;
+  background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center center;
+  background-position: center top;
   background-color: #000000;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
 }
 .kei-yasui-logo {
   display: block;
   position: absolute;
   top: 20px;
   left: 20px;
+  z-index: 2;
   -webkit-transform: translateZ(0px);
   -moz-transform: translateZ(0px);
   -o-transform: translateZ(0px);
@@ -202,9 +200,9 @@ body.mobile {
   padding: 10px;
   font-family: 'open_sanslight_italic', "Helvetica Neue", Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
-  -webkit-opacity: 0.6;
-  -moz-opacity: 0.6;
-  opacity: 0.6;
+  -webkit-opacity: 0.8;
+  -moz-opacity: 0.8;
+  opacity: 0.8;
   right: -200%;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -236,6 +234,12 @@ body.mobile {
   -ms-filter: blur(0px);
   filter: blur(0px);
 }
+.touch .animate-blur {
+  -webkit-filter: blur(0px);
+  -moz-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(0px);
+}
 .animate-opacity {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
@@ -246,6 +250,11 @@ body.mobile {
   opacity: 0;
 }
 .animate-opacity.activate {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.touch .animate-opacity {
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
@@ -277,6 +286,11 @@ body.mobile {
   padding: 0;
   margin: 20% 4%;
   width: 92%;
+}
+@media only screen and (max-width: 960px) {
+  .welcome-section h2 {
+    margin: 20% 4%;
+  }
 }
 .work-section {
   background: #ffffff;
@@ -422,7 +436,6 @@ body.mobile {
   bottom: 0;
   width: 50%;
   height: 100%;
-  background: url('../images/loader.gif') no-repeat center center;
 }
 @media only screen and (max-width: 960px) {
   .work-section .work-image {
@@ -494,6 +507,11 @@ body.mobile {
   color: #ffffff;
   padding: 0 0 10% 0;
 }
+@media only screen and (max-width: 960px) {
+  .resume {
+    padding: 0 4% 10% 4%;
+  }
+}
 .resume .resume-header {
   font-weight: normal;
   font-family: 'open_sansbold', "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -519,6 +537,12 @@ body.mobile {
   text-align: right;
   font-weight: normal;
   font-family: 'open_sansitalic', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0;
+}
+@media only screen and (max-width: 960px) {
+  .resume .resume-sub-header .date {
+    font-size: 12px;
+  }
 }
 .resume .resume-detail {
   font-family: 'open_sanslight', "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -577,7 +601,7 @@ body.mobile {
 }
 @media only screen and (max-width: 960px) {
   .contact-section {
-    min-height: 600px;
+    min-height: 100%;
   }
 }
 .contact-section h2 {
@@ -596,7 +620,8 @@ body.mobile {
 }
 @media only screen and (max-width: 960px) {
   .contact-section h2 {
-    line-height: 600px;
+    line-height: 24px;
+    margin: 30% auto;
   }
 }
 .contact-section h2 a {
